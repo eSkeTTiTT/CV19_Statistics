@@ -1,9 +1,10 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace WPF_MVVM.ViewModels.Base
 {
-    public abstract class ViewModel : INotifyPropertyChanged
+    public abstract class ViewModel : INotifyPropertyChanged, IDisposable
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -25,5 +26,28 @@ namespace WPF_MVVM.ViewModels.Base
 
             return true;
         }
+
+        #region IDisposable
+
+        //~ViewModel()
+        //{
+        //    Dispose(false);
+        //}
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        private bool _isDisposed;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposing || _isDisposed) return;
+
+            _isDisposed = true;
+            // освобождение управляемых ресурсов
+        }
+
+        #endregion
     }
 }
