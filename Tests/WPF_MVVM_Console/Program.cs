@@ -43,11 +43,25 @@ namespace WPF_MVVM_Console
             .Select(s => DateTime.Parse(s, CultureInfo.InvariantCulture))
             .ToArray();
 
+        private static IEnumerable<(string Country, string Province, int[] Counts)> GetData()
+        {
+            var lines = GetDataLines()
+                .Skip(1) // пропускаем заголовок
+                .Select(line => line.Split(','));
 
+            foreach (var row in lines)
+            {
+                var province = row[0].Trim();
+                var country_name = row[1].Trim(' ', '"');
+                var counts = row.Skip(4).Select(int.Parse).ToArray(); // пропускаем широту и долготу
+
+                yield return (country_name, province, counts);
+            }
+        }
 
         static void Main(string[] args)
         {
-            
+            Console.WriteLine(string.Join("\r\n", GetDates().Zip()
         }
     }
 }
