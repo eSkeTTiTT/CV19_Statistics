@@ -50,17 +50,26 @@
                                 ItemsSource="{Binding Source={StaticResource GroupsCollection}}"
                                 DisplayMemberPath="Name"
                                 SelectedItem="{Binding SelectedGroup}"
-                                />
+                                VirtualizingPanel.IsContainerVirtualizable="True"
+                                VirtualizingPanel.IsVirtualizing="True"
+                                VirtualizingPanel.VirtualizationMode="Recycling"
+                                >
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
                         </DockPanel>
                     </GroupBox>
                     <GroupBox Grid.Column="1" Header="{Binding SelectedGroup.Name, FallbackValue='Студенты', TargetNullValue='Группы не выбрано'}">
                         <DockPanel>
                             <DockPanel DockPanel.Dock="Top" Margin="0 3">
                                 <fa:ImageAwesome Height="12" Icon="Solid_Search" Margin="3 0"/>
-                                <TextBox />
+                                <TextBox Text="{Binding StudentFilterText, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
                             </DockPanel>
                             <DataGrid 
-                                ItemsSource="{Binding SelectedGroup.Students}"
+                                ItemsSource="{Binding SelectedGroupStudents}"
                                 AutoGenerateColumns="False"
                                 CanUserAddRows="False"
                                 GridLinesVisibility="Vertical"
