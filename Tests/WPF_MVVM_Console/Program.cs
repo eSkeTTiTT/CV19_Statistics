@@ -61,7 +61,7 @@ namespace WPF_MVVM_Console
 
         static void Main(string[] args)
         {
-            Console.WriteLine(string.Join("\r\n", GetDates().Zip()
+            
         }
     }
 }
