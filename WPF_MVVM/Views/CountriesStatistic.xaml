@@ -3,18 +3,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" mc:Ignorable="d"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:fa="http://schemas.fontawesome.com/icons/"
+             xmlns:vm="clr-namespace:WPF_MVVM.ViewModels"
+             xmlns:info="clr-namespace:WPF_MVVM.Models"
              xmlns:local="clr-namespace:WPF_MVVM.Views"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance vm:CountriesStatisticViewModel}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="230"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <GridSplitter Width="3" Background="Transparent"/>
+        <GridSplitter/>
         <GroupBox Header="Список стран">
-            <ListBox>
-                
-            </ListBox>
+            <DockPanel>
+                <Button DockPanel.Dock="Top" Command="{Binding RefreshDataCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:ImageAwesome Height="12" Icon="Solid_ArrowDown" Margin="0 0 3 0"/>
+                        <TextBlock Text="Загрузить данные"/>
+                    </StackPanel>
+                </Button>
+                <ListBox ItemsSource="{Binding Countries}" DockPanel.Dock="Bottom" SelectedItem="{Binding SelectedCountry, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type info:CountryInfo}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Margin="0 0 3 0" Text="{Binding Name}"/>
+                                <TextBlock Text="{Binding Location}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
         </GroupBox>
         <GroupBox Grid.Column="1" Header="Информация">
             <Grid>
@@ -22,7 +41,7 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <GridSplitter Height="3" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Background="Transparent"/>
+                <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
             </Grid>
         </GroupBox>
     </Grid>
