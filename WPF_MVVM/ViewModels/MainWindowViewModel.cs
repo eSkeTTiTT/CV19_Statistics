@@ -46,7 +46,7 @@ namespace WPF_MVVM.ViewModels
 
         #region View Models
 
-
+        public DirectoryViewModel DiskRootDir { get; } = new DirectoryViewModel("c:\\");
 
         #endregion
 
@@ -62,6 +62,13 @@ namespace WPF_MVVM.ViewModels
                 _selectedGroupStudents.Source = value?.Students;
                 OnPropertyChanged(nameof(SelectedGroupStudents));
             }
+        }
+
+        private DirectoryViewModel _selectedDirectory;
+        public DirectoryViewModel SelectedDirectory
+        {
+            get => _selectedDirectory;
+            set => Set(ref _selectedDirectory, value);
         }
 
         private readonly CollectionViewSource _selectedGroupStudents = new CollectionViewSource();

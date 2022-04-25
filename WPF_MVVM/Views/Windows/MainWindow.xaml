@@ -101,6 +101,34 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
+            <TabItem Header="Файловая система">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="250"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Header="Директории">
+                        <TreeView ItemsSource="{Binding DiskRootDir.SubDirectories}">
+                            <TreeView.ItemTemplate>
+                                <HierarchicalDataTemplate 
+                                    DataType="{x:Type vm:DirectoryViewModel}"
+                                    ItemsSource="{Binding SubDirectories}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <fa:ImageAwesome Height="12" Width="12" Icon="Regular_Folder" Margin="0 0 5 0" Foreground="Yellow"/>
+                                        <TextBlock
+                                            Text="{Binding Name}"
+                                            ToolTip="{Binding CreationTime}"
+                                            />
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                            </TreeView.ItemTemplate>
+                        </TreeView>
+                    </GroupBox>
+                    <GroupBox Grid.Column="1" Header="Файлы">
+                        
+                    </GroupBox>
+                </Grid>
+            </TabItem>
         </TabControl>
     </DockPanel>
 </Window>
