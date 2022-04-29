@@ -32,7 +32,7 @@ namespace WPF_MVVM_Console
 
                 if (string.IsNullOrWhiteSpace(line)) continue;
 
-                yield return line;
+                yield return line.Replace("Korea,", "Korea -");
             }
         }
 

@@ -18,7 +18,13 @@ namespace WPF_MVVM.ViewModels
 
         public MainWindowViewModel()
         {
+            #region Commands
+
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
+
+            #endregion
+
+            CountriesStatistic = new CountriesStatisticViewModel(this);
 
             int student_index = 1;
             var students = Enumerable.Range(1, 10).Select(i => new Student
@@ -47,6 +53,7 @@ namespace WPF_MVVM.ViewModels
         #region View Models
 
         public DirectoryViewModel DiskRootDir { get; } = new DirectoryViewModel("c:\\");
+        public CountriesStatisticViewModel CountriesStatistic { get; }
 
         #endregion
 

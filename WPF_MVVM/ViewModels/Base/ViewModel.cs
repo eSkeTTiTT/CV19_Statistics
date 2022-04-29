@@ -1,12 +1,15 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Markup;
 
 namespace WPF_MVVM.ViewModels.Base
 {
-    public abstract class ViewModel : INotifyPropertyChanged, IDisposable
+    public abstract class ViewModel : MarkupExtension, INotifyPropertyChanged, IDisposable
     {
         public event PropertyChangedEventHandler PropertyChanged;
+
+        #region INotifyPropertyChanged
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -27,6 +30,8 @@ namespace WPF_MVVM.ViewModels.Base
             return true;
         }
 
+        #endregion
+
         #region IDisposable
 
         //~ViewModel()
@@ -46,6 +51,15 @@ namespace WPF_MVVM.ViewModels.Base
 
             _isDisposed = true;
             // освобождение управляемых ресурсов
+        }
+
+        #endregion
+
+        #region Markup Extension
+
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return this;
         }
 
         #endregion
