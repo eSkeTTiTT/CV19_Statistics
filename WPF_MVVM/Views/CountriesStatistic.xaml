@@ -8,6 +8,7 @@
              xmlns:info="clr-namespace:WPF_MVVM.Models"
              xmlns:con="clr-namespace:WPF_MVVM.Infrastructure.Converters"
              xmlns:oxy="http://oxyplot.org/wpf"
+             xmlns:m="clr-namespace:MapControl;assembly=MapControl.WPF"
              xmlns:local="clr-namespace:WPF_MVVM.Views"
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance vm:CountriesStatisticViewModel}">
@@ -57,6 +58,13 @@
                         DataFieldY="Count"
                         />
                 </oxy:Plot>
+                <m:Map Grid.Row="1" ZoomLevel="4" MaxZoomLevel="21" Center="{Binding SelectedCountry.Location, Converter={con:PointToMapLocationConverter}}" Margin="10">
+                    <m:MapScale Margin="4" Opacity="1" Background="Transparent" VerticalAlignment="Bottom"/>
+                    <m:MapGraticule Opacity="0.3" Background="Transparent"/>
+                    <m:Map.MapLayer>
+                        <m:MapTileLayer TileSource="https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg"/>
+                    </m:Map.MapLayer>
+                </m:Map>
             </Grid>
         </GroupBox>
     </Grid>
