@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using WPF_MVVM.Services;
+using WPF_MVVM.Services.Interfaces;
 using WPF_MVVM.ViewModels;
 
 namespace WPF_MVVM
@@ -52,7 +53,7 @@ namespace WPF_MVVM
 
         public static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
         {
-            services.AddSingleton<DataService>();
+            services.AddSingleton<IDataService, DataService>();
 
             services.AddSingleton<MainWindowViewModel>();
             services.AddSingleton<CountriesStatisticViewModel>();

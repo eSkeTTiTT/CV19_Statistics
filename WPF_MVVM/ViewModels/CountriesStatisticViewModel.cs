@@ -7,13 +7,14 @@ using System.Windows.Input;
 using WPF_MVVM.Infrastructure.Commands;
 using WPF_MVVM.Models;
 using WPF_MVVM.Services;
+using WPF_MVVM.Services.Interfaces;
 using WPF_MVVM.ViewModels.Base;
 
 namespace WPF_MVVM.ViewModels
 {
     public class CountriesStatisticViewModel : ViewModel
     {
-        private DataService _dataService;
+        private readonly IDataService _dataService;
         public MainWindowViewModel MainViewModel { get; internal set; }
 
         private IEnumerable<CountryInfo> _countries;
@@ -30,7 +31,7 @@ namespace WPF_MVVM.ViewModels
             set => Set(ref _selectedCounrty, value);
         }
 
-        public CountriesStatisticViewModel(DataService dataService)
+        public CountriesStatisticViewModel(IDataService dataService)
         {
             _dataService = dataService;
 

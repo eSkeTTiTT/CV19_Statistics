@@ -4,15 +4,15 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using WPF_MVVM.Models;
+using WPF_MVVM.Services.Interfaces;
 
 namespace WPF_MVVM.Services
 {
-    public class DataService
+    public class DataService : IDataService
     {
         private const string DataSourceAdress = @"https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv";
 
