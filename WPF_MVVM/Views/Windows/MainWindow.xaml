@@ -9,10 +9,10 @@
         xmlns:view="clr-namespace:WPF_MVVM.Views"
         xmlns:con="clr-namespace:WPF_MVVM.Infrastructure.Converters"
         xmlns:local="clr-namespace:WPF_MVVM"
-        Title="{Binding Title}" Height="450" Width="800">
-    <Window.DataContext>
-        <vm:MainWindowViewModel />
-    </Window.DataContext>
+        Title="{Binding Title}"
+        DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
+        Height="450" 
+        Width="800">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">

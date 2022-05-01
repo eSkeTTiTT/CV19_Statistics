@@ -14,7 +14,7 @@ namespace WPF_MVVM.ViewModels
     public class CountriesStatisticViewModel : ViewModel
     {
         private DataService _dataService;
-        private MainWindowViewModel MainViewModel { get; }
+        public MainWindowViewModel MainViewModel { get; internal set; }
 
         private IEnumerable<CountryInfo> _countries;
         public IEnumerable<CountryInfo> Countries
@@ -30,11 +30,9 @@ namespace WPF_MVVM.ViewModels
             set => Set(ref _selectedCounrty, value);
         }
 
-        public CountriesStatisticViewModel(MainWindowViewModel mainVM)
+        public CountriesStatisticViewModel(DataService dataService)
         {
-            MainViewModel = mainVM;
-
-            _dataService = new DataService();
+            _dataService = dataService;
 
             #region Commands
 
@@ -46,7 +44,7 @@ namespace WPF_MVVM.ViewModels
         /// <summary>
         /// Отладочный конструктор
         /// </summary>
-        public CountriesStatisticViewModel() : this(null)
+        /*public CountriesStatisticViewModel() : this(null)
         {
             Countries = Enumerable.Range(1, 10)
                 .Select(p => new CountryInfo
@@ -59,7 +57,7 @@ namespace WPF_MVVM.ViewModels
                         Counts = Enumerable.Range(1, 10).Select(k => new ConfirmedCount { Date = DateTime.Now, Count = k}).ToArray()
                     }).ToArray()
                 }).ToArray();
-        }
+        }*/
 
         #region Commands
 

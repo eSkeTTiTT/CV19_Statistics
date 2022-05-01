@@ -16,7 +16,7 @@ namespace WPF_MVVM.ViewModels
     {
         #region Constructors
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(CountriesStatisticViewModel statistic)
         {
             #region Commands
 
@@ -24,7 +24,10 @@ namespace WPF_MVVM.ViewModels
 
             #endregion
 
-            CountriesStatistic = new CountriesStatisticViewModel(this);
+            Title = "Статистика Короновируса";
+
+            CountriesStatistic = statistic;
+            statistic.MainViewModel = this;
 
             int student_index = 1;
             var students = Enumerable.Range(1, 10).Select(i => new Student
