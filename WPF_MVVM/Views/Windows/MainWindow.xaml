@@ -9,10 +9,10 @@
         xmlns:view="clr-namespace:WPF_MVVM.Views"
         xmlns:con="clr-namespace:WPF_MVVM.Infrastructure.Converters"
         xmlns:local="clr-namespace:WPF_MVVM"
-        Title="{Binding Title}" Height="450" Width="800">
-    <Window.DataContext>
-        <vm:MainWindowViewModel />
-    </Window.DataContext>
+        Title="{Binding Title}"
+        DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
+        Height="450" 
+        Width="800">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
@@ -143,6 +143,19 @@
                         
                     </GroupBox>
                 </Grid>
+            </TabItem>
+            <TabItem Header="Отладка">
+                <DockPanel>
+                    <DockPanel DockPanel.Dock="Top">
+                        <UniformGrid DockPanel.Dock="Left" HorizontalAlignment="Left" Rows="1">
+                            <Button Command="{Binding StartProcessCommand}" Content="Запуск" Margin="5" Padding="20,5"/>
+                            <Button Command="{Binding StopProcessCommand}" Content="Остановка" Margin="5" Padding="20,5"/>
+                        </UniformGrid>
+                        <ProgressBar Height="20" Margin="10"/>
+                    </DockPanel>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+                               Text="{Binding DataValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="30"/>
+                </DockPanel>
             </TabItem>
         </TabControl>
     </DockPanel>

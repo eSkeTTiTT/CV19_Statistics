@@ -8,6 +8,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using WPF_MVVM.Infrastructure.Commands;
 using WPF_MVVM.Models.Decanat;
+using WPF_MVVM.Services.Interfaces;
 using WPF_MVVM.ViewModels.Base;
 
 namespace WPF_MVVM.ViewModels
@@ -16,15 +17,21 @@ namespace WPF_MVVM.ViewModels
     {
         #region Constructors
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(CountriesStatisticViewModel statistic, IAsyncDataService asyncData)
         {
             #region Commands
 
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
+            StartProcessCommand = new LambdaCommand(OnStartProcessCommandExecuted, CanStartProcessCommandExecute);
+            StopProcessCommand = new LambdaCommand(OnStopProcessCommandExecuted, CanStopProcessCommandExecute);
 
             #endregion
 
-            CountriesStatistic = new CountriesStatisticViewModel(this);
+            Title = "Статистика Короновируса";
+
+            _asyncData = asyncData;
+            CountriesStatistic = statistic;
+            statistic.MainViewModel = this;
 
             int student_index = 1;
             var students = Enumerable.Range(1, 10).Select(i => new Student
@@ -49,6 +56,12 @@ namespace WPF_MVVM.ViewModels
         #endregion
 
         #region Properties
+
+        #region Services
+
+        private readonly IAsyncDataService _asyncData;
+
+        #endregion
 
         #region View Models
 
@@ -99,6 +112,13 @@ namespace WPF_MVVM.ViewModels
             }
         }
 
+        private string _dataValue;
+        public string DataValue
+        {
+            get => _dataValue;
+            private set => Set(ref _dataValue, value);
+        }
+
         #endregion
 
         #region Commands
@@ -113,6 +133,32 @@ namespace WPF_MVVM.ViewModels
         }
 
         private bool CanCloseApplicationCommandExecute(object p) => true;
+
+        #endregion
+
+        #region Start Process Command
+
+        public ICommand StartProcessCommand { get; }
+
+        private void OnStartProcessCommandExecuted(object p)
+        {
+            DataValue = _asyncData.GetResult(DateTime.Now);
+        }
+
+        private bool CanStartProcessCommandExecute(object p) => true;
+
+        #endregion
+
+        #region Stop Process Command
+
+        public ICommand StopProcessCommand { get; }
+
+        private void OnStopProcessCommandExecuted(object p)
+        {
+
+        }
+
+        private bool CanStopProcessCommandExecute(object p) => true;
 
         #endregion
 
