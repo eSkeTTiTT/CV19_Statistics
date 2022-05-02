@@ -22,6 +22,8 @@ namespace WPF_MVVM.ViewModels
             #region Commands
 
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
+            StartProcessCommand = new LambdaCommand(OnStartProcessCommandExecuted, CanStartProcessCommandExecute);
+            StopProcessCommand = new LambdaCommand(OnStopProcessCommandExecuted, CanStopProcessCommandExecute);
 
             #endregion
 
@@ -110,6 +112,13 @@ namespace WPF_MVVM.ViewModels
             }
         }
 
+        private string _dataValue;
+        public string DataValue
+        {
+            get => _dataValue;
+            private set => Set(ref _dataValue, value);
+        }
+
         #endregion
 
         #region Commands
@@ -124,6 +133,32 @@ namespace WPF_MVVM.ViewModels
         }
 
         private bool CanCloseApplicationCommandExecute(object p) => true;
+
+        #endregion
+
+        #region Start Process Command
+
+        public ICommand StartProcessCommand { get; }
+
+        private void OnStartProcessCommandExecuted(object p)
+        {
+            DataValue = _asyncData.GetResult(DateTime.Now);
+        }
+
+        private bool CanStartProcessCommandExecute(object p) => true;
+
+        #endregion
+
+        #region Stop Process Command
+
+        public ICommand StopProcessCommand { get; }
+
+        private void OnStopProcessCommandExecuted(object p)
+        {
+
+        }
+
+        private bool CanStopProcessCommandExecute(object p) => true;
 
         #endregion
 

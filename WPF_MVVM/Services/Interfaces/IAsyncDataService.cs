@@ -6,6 +6,6 @@ namespace WPF_MVVM.Services.Interfaces
 {
     public interface IAsyncDataService
     {
-
+        string GetResult(DateTime time);
     }
 }

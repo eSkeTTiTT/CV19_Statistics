@@ -144,6 +144,19 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
+            <TabItem Header="Отладка">
+                <DockPanel>
+                    <DockPanel DockPanel.Dock="Top">
+                        <UniformGrid DockPanel.Dock="Left" HorizontalAlignment="Left" Rows="1">
+                            <Button Command="{Binding StartProcessCommand}" Content="Запуск" Margin="5" Padding="20,5"/>
+                            <Button Command="{Binding StopProcessCommand}" Content="Остановка" Margin="5" Padding="20,5"/>
+                        </UniformGrid>
+                        <ProgressBar Height="20" Margin="10"/>
+                    </DockPanel>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+                               Text="{Binding DataValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="30"/>
+                </DockPanel>
+            </TabItem>
         </TabControl>
     </DockPanel>
 </Window>
