@@ -51,12 +51,8 @@ namespace WPF_MVVM
             _host = null;
         }
 
-        public static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
-        {
-            services.AddSingleton<IDataService, DataService>();
-
-            services.AddSingleton<MainWindowViewModel>();
-            services.AddSingleton<CountriesStatisticViewModel>();
-        }
+        public static void ConfigureServices(HostBuilderContext host, IServiceCollection services) => services
+            .RegisterServices()
+            .RegisterViewModels();
     }
 }

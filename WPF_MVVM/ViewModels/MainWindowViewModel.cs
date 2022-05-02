@@ -8,6 +8,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using WPF_MVVM.Infrastructure.Commands;
 using WPF_MVVM.Models.Decanat;
+using WPF_MVVM.Services.Interfaces;
 using WPF_MVVM.ViewModels.Base;
 
 namespace WPF_MVVM.ViewModels
@@ -16,7 +17,7 @@ namespace WPF_MVVM.ViewModels
     {
         #region Constructors
 
-        public MainWindowViewModel(CountriesStatisticViewModel statistic)
+        public MainWindowViewModel(CountriesStatisticViewModel statistic, IAsyncDataService asyncData)
         {
             #region Commands
 
@@ -26,6 +27,7 @@ namespace WPF_MVVM.ViewModels
 
             Title = "Статистика Короновируса";
 
+            _asyncData = asyncData;
             CountriesStatistic = statistic;
             statistic.MainViewModel = this;
 
@@ -52,6 +54,12 @@ namespace WPF_MVVM.ViewModels
         #endregion
 
         #region Properties
+
+        #region Services
+
+        private readonly IAsyncDataService _asyncData;
+
+        #endregion
 
         #region View Models
 
