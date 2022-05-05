@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace WPF_MVVM_Console
@@ -61,7 +62,19 @@ namespace WPF_MVVM_Console
 
         static void Main(string[] args)
         {
-            
+            Thread thread = new Thread(TestMethod);
+            thread.IsBackground = true;
+            thread.Start();
+
+            thread.Join();
+        }
+
+        public static void TestMethod()
+        {
+            for (int i = 0; i < 100; ++i)
+            {
+                Console.WriteLine(i);
+            }
         }
     }
 }
