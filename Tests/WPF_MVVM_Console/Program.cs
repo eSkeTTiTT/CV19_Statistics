@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace WPF_MVVM_Console
@@ -59,9 +60,9 @@ namespace WPF_MVVM_Console
             }
         }
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            
+            //WebServerTest.Run();
         }
     }
 }

@@ -17,7 +17,7 @@ namespace WPF_MVVM.ViewModels
     {
         #region Constructors
 
-        public MainWindowViewModel(CountriesStatisticViewModel statistic, IAsyncDataService asyncData)
+        public MainWindowViewModel(CountriesStatisticViewModel statistic, WebServerViewModel webServer, IAsyncDataService asyncData)
         {
             #region Commands
 
@@ -32,6 +32,8 @@ namespace WPF_MVVM.ViewModels
             _asyncData = asyncData;
             CountriesStatistic = statistic;
             statistic.MainViewModel = this;
+
+            WebServer = webServer;
 
             int student_index = 1;
             var students = Enumerable.Range(1, 10).Select(i => new Student
@@ -67,6 +69,7 @@ namespace WPF_MVVM.ViewModels
 
         public DirectoryViewModel DiskRootDir { get; } = new DirectoryViewModel("c:\\");
         public CountriesStatisticViewModel CountriesStatistic { get; }
+        public WebServerViewModel WebServer { get; }
 
         #endregion
 
@@ -189,3 +192,4 @@ namespace WPF_MVVM.ViewModels
         #endregion
     }
 }
+
