@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace WPF_MVVM_Web
 {
@@ -48,6 +47,7 @@ namespace WPF_MVVM_Web
         public void Stop()
         {
             if (!_enabled) return;
+
             lock(_syncRoot)
             {
                 if (!_enabled) return;
@@ -62,10 +62,15 @@ namespace WPF_MVVM_Web
 
             listener.Start();
 
+            HttpListenerContext context = null;
             while (_enabled)
             {
-                var context = await listener.GetContextAsync().ConfigureAwait(false);
-                ProcessRequest(context);
+                var get_context_task = listener.GetContextAsync();
+
+                if (context != null)
+                    ProcessRequestAsync(context);
+
+                context = await get_context_task.ConfigureAwait(false);
             }
 
             listener.Stop();
@@ -74,6 +79,11 @@ namespace WPF_MVVM_Web
         private void ProcessRequest(HttpListenerContext context)
         {
             RequestReceived?.Invoke(this, new RequestReceivedEventArgs(context));
+        }
+
+        private async void ProcessRequestAsync(HttpListenerContext context)
+        {
+            await Task.Run(() => RequestReceived?.Invoke(this, new RequestReceivedEventArgs(context)));
         }
     }
 

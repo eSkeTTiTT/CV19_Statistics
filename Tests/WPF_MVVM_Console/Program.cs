@@ -62,7 +62,7 @@ namespace WPF_MVVM_Console
 
         public static void Main(string[] args)
         {
-            WebServerTest.Run();
-        }   
+            //WebServerTest.Run();
+        }
     }
 }
