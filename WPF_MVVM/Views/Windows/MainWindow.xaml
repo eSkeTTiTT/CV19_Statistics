@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:WPF_MVVM.ViewModels"
+        xmlns:commands="clr-namespace:WPF_MVVM.Infrastructure.Commands"
         xmlns:decanat="clr-namespace:WPF_MVVM.Models.Decanat"
         xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:view="clr-namespace:WPF_MVVM.Views"
@@ -33,6 +34,12 @@
                     <Separator/>
                     <MenuItem Header="Включить" Command="{Binding StartCommand}"/>
                     <MenuItem Header="Выключить" Command="{Binding StopCommand}"/>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Управление студентами">
+                    <MenuItem.Command>
+                        <commands:ManageStudentsCommand/>
+                    </MenuItem.Command>
                 </MenuItem>
             </MenuItem>
         </Menu>

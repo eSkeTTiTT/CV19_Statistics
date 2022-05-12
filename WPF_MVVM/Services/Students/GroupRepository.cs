@@ -4,7 +4,7 @@ using System.Text;
 using WPF_MVVM.Models.Decanat;
 using WPF_MVVM.Services.Base;
 
-namespace WPF_MVVM.Services
+namespace WPF_MVVM.Services.Students
 {
     public class GroupRepository : RepositoryInMemory<Group>
     {

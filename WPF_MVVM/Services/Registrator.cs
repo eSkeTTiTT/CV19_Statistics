@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using WPF_MVVM.Services.Interfaces;
+using WPF_MVVM.Services.Students;
 
 namespace WPF_MVVM.Services
 {
