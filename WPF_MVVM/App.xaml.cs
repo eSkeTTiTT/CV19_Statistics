@@ -25,7 +25,7 @@ namespace WPF_MVVM
         private static IHost _host;
         public static IHost Host => _host ??= Program.CreateHostBuilder(Environment.GetCommandLineArgs()).Build();
 
-        public static string CurrentDirectory => IsDesignMode 
+        public static string CurrentDirectory => IsDesignMode
             ? Path.GetDirectoryName(GetSourceCodePath())
             : Environment.CurrentDirectory;
 
