@@ -24,6 +24,17 @@
             <MenuItem Header="Помощь">
                 <MenuItem Header="О программе"/>
             </MenuItem>
+            <MenuItem Header="Сервис">
+                <MenuItem Header="Веб-сервер" DataContext="{Binding WebServer}">
+                    <MenuItem Header="Включен" 
+                              IsCheckable="True"
+                              IsChecked="{Binding Enabled}"
+                              />
+                    <Separator/>
+                    <MenuItem Header="Включить" Command="{Binding StartCommand}"/>
+                    <MenuItem Header="Выключить" Command="{Binding StopCommand}"/>
+                </MenuItem>
+            </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
             
@@ -153,8 +164,8 @@
                         </UniformGrid>
                         <ProgressBar Height="20" Margin="10"/>
                     </DockPanel>
-                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
-                               Text="{Binding DataValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="30"/>
+                    <!--TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+                               Text="{Binding DataValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="30"/-->
                 </DockPanel>
             </TabItem>
         </TabControl>
