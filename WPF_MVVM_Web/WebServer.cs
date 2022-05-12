@@ -8,7 +8,7 @@ namespace WPF_MVVM_Web
 {
     public class WebServer
     {
-        private event EventHandler<RequestReceivedEventArgs> RequestReceived;
+        public event EventHandler<RequestReceivedEventArgs> RequestReceived;
 
         //private TcpListener _listener = new TcpListener(new IPEndPoint(IPAddress.Any, 8080));
         private HttpListener _listener;
@@ -38,8 +38,8 @@ namespace WPF_MVVM_Web
             {
                 if (_enabled) return; // чтобы след поток не начал делать тоже самое
                 _listener = new HttpListener();
-                _listener.Prefixes.Add($"http://*:{_port}");
-                _listener.Prefixes.Add($"http://+:{_port}");
+                _listener.Prefixes.Add($"http://*:{_port}/");
+                _listener.Prefixes.Add($"http://+:{_port}/");
                 _enabled = true;
                 ListenAsync();
             }

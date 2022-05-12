@@ -60,21 +60,9 @@ namespace WPF_MVVM_Console
             }
         }
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Thread thread = new Thread(TestMethod);
-            thread.IsBackground = true;
-            thread.Start();
-
-            thread.Join();
-        }
-
-        public static void TestMethod()
-        {
-            for (int i = 0; i < 100; ++i)
-            {
-                Console.WriteLine(i);
-            }
-        }
+            WebServerTest.Run();
+        }   
     }
 }
