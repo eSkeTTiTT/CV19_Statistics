@@ -13,6 +13,7 @@ namespace WPF_MVVM.Services
             services.AddTransient<IWebServerService, HttpListenerWebServer>();
             services.AddSingleton<StudentsRepository>();
             services.AddSingleton<GroupRepository>();
+            services.AddSingleton<StudentManager>();
 
             return services;
         }

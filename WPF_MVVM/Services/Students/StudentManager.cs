@@ -14,7 +14,7 @@ namespace WPF_MVVM.Services.Students
         public IEnumerable<Student> Students => _students.GetAll();
         public IEnumerable<Group> Groups => _groups.GetAll();
 
-        public StudentManager(StudentsRepository students, GroupRepository groups)
+        public StudentManager(GroupRepository groups, StudentsRepository students)
         {
             _students = students;
             _groups = groups;

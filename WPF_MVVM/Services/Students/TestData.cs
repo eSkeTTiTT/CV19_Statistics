@@ -8,35 +8,37 @@ namespace WPF_MVVM.Services.Students
 {
     public static class TestData
     {
-        public static Group[] Groups => Enumerable
+        private static Group[] _groups;
+        private static Student[] _students;
+
+        public static Group[] Groups => _groups ??= Enumerable
             .Range(1, 10)
             .Select(i => new Group { Name = $"Группа {i}" })
             .ToArray();
 
-        public static Student[] Students
+        public static Student[] Students => _students ??= CreateStudents(_groups);
+
+        private static Student[] CreateStudents(IEnumerable<Group> groups)
         {
-            get
+            var rnd = new Random();
+
+            int index = 1;
+            foreach (var group in groups)
             {
-                var rnd = new Random();
-
-                int index = 1;
-                foreach(var group in Groups)
+                for (int i = 0; i < 10; ++i)
                 {
-                    for (int i = 0; i < 10; ++i)
+                    group.Students.Add(new Student
                     {
-                        group.Students.Add(new Student
-                        {
-                            Name = $"Имя {index}",
-                            Surname = $"Фамилия {index}",
-                            Patronymic = $"Отчество {index++}",
-                            Birthday = DateTime.Now.Subtract(TimeSpan.FromDays(300 * rnd.Next(19, 30))),
-                            Rating = rnd.Next() * 100
-                        });
-                    }
+                        Name = $"Имя {index}",
+                        Surname = $"Фамилия {index}",
+                        Patronymic = $"Отчество {index++}",
+                        Birthday = DateTime.Now.Subtract(TimeSpan.FromDays(300 * rnd.Next(19, 30))),
+                        Rating = rnd.NextDouble() * 100
+                    });
                 }
-
-                return Groups.SelectMany(g => g.Students).ToArray();
             }
+
+            return groups.SelectMany(g => g.Students).ToArray();
         }
     }
 }

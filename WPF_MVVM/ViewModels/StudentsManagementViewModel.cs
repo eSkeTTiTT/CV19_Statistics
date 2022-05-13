@@ -19,6 +19,20 @@ namespace WPF_MVVM.ViewModels
 
         public IEnumerable<Group> Groups => _studentManager.Groups;
 
+        private Group _selectedGroup;
+        public Group SelectedGroup
+        {
+            get => _selectedGroup;
+            set => Set(ref _selectedGroup, value);
+        }
+
+        private Student _selectedStudent;
+        public Student SelectedStudent
+        {
+            get => _selectedStudent;
+            set => Set(ref _selectedStudent, value);
+        }
+
         #endregion
 
         public StudentsManagementViewModel(StudentManager studentManager)
