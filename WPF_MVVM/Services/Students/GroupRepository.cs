@@ -8,6 +8,8 @@ namespace WPF_MVVM.Services.Students
 {
     public class GroupRepository : RepositoryInMemory<Group>
     {
+        public GroupRepository() : base(TestData.Groups) { }
+
         protected override void Update(Group source, Group destination)
         {
             destination.Name = source.Name;
